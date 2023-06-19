@@ -14,7 +14,7 @@ function drawBoxes(length = 16) {
             box.style.cssText = "box-sizing: box-content; border: 1px solid black; flex: 1 1 0";
             
             // code to make boxes turn blue upon hover
-            box.addEventListener('mouseover', e => box.style['background-color'] = 'skyblue');
+            box.addEventListener('mouseover', e => box.style['background-color'] = randomColor());
 
             row.appendChild(box);
         }
@@ -54,6 +54,15 @@ resetButton.addEventListener('click', e => {
     container.replaceChildren(...newRows);
 })
 
+// code reuse from https://stackoverflow.com/questions/23095637/how-do-you-get-random-rgb-in-javascript
+function randomColor() {
+    const randomBetween = (min, max) => Math.floor(min + Math.random() * max);
+    const r = randomBetween(0, 255);
+    const g = randomBetween(0,255);
+    const b = randomBetween(0,255); 
+    return `rgb(${r},${g},${b})`;
+}
+
 const drawspace = document.querySelector(".drawspace");
 drawspace.style.display = 'flex';
 drawspace.style.justifyContent = 'center';
@@ -63,3 +72,4 @@ container.style.cssText = "display: flex; flex-direction: column; height: 960px;
 
 drawBoxes();
 
+ 
