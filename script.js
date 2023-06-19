@@ -1,9 +1,3 @@
-const body = document.querySelector(".drawspace");
-body.style.display = 'flex';
-body.style.justifyContent = 'center';
-
-const container = document.querySelector(".container");
-container.style.cssText = "display: flex; flex-direction: column; height: 960px; width: 960px;"
 
 function drawBoxes(length = 16) {
     //  create 16 rows 
@@ -30,10 +24,7 @@ function drawBoxes(length = 16) {
 }
 
 
-drawBoxes();
-
-
-const getGridButton = document.querySelector("button");
+const getGridButton = document.querySelector(".set-grids");
 getGridButton.addEventListener('click', e => {
 
     let noOfGrids;
@@ -49,3 +40,26 @@ getGridButton.addEventListener('click', e => {
     container.replaceChildren();
     drawBoxes(noOfGrids);
 })
+
+const resetButton = document.querySelector(".reset");
+resetButton.addEventListener('click', e => {
+    const newRows = Array.from(container.childNodes).map(row => {
+        const newBoxes = Array.from(row.childNodes).map(node => {
+            node.style.backgroundColor = 'white';
+            return node;
+        });
+        row.replaceChildren(...newBoxes);
+        return row;
+    })
+    container.replaceChildren(...newRows);
+})
+
+const drawspace = document.querySelector(".drawspace");
+drawspace.style.display = 'flex';
+drawspace.style.justifyContent = 'center';
+
+const container = document.querySelector(".container");
+container.style.cssText = "display: flex; flex-direction: column; height: 960px; width: 960px;"
+
+drawBoxes();
+
