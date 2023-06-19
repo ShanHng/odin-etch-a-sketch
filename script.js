@@ -1,5 +1,9 @@
 
 function drawBoxes(length = 16) {
+
+    // reset brightness 
+    brightness = 1.0;
+
     //  create 16 rows 
     for (let i = 0; i < length; i++) {
         const row = document.createElement("div");
@@ -14,7 +18,11 @@ function drawBoxes(length = 16) {
             box.style.cssText = "box-sizing: box-content; border: 1px solid black; flex: 1 1 0";
             
             // code to make boxes turn blue upon hover
-            box.addEventListener('mouseover', e => box.style['background-color'] = randomColor());
+            box.addEventListener('mouseover', e => {
+                box.style['background-color'] = randomColor();
+                box.style.filter = `brightness(${brightness.toPrecision(2)})`;
+                if (brightness >= 0.1) brightness -= 0.1;
+            });
 
             row.appendChild(box);
         }
@@ -46,12 +54,14 @@ resetButton.addEventListener('click', e => {
     const newRows = Array.from(container.childNodes).map(row => {
         const newBoxes = Array.from(row.childNodes).map(node => {
             node.style.backgroundColor = 'white';
+            node.style.filter = 'brightness(1.0)';
             return node;
         });
         row.replaceChildren(...newBoxes);
         return row;
     })
     container.replaceChildren(...newRows);
+    brightness = 1;
 })
 
 // code reuse from https://stackoverflow.com/questions/23095637/how-do-you-get-random-rgb-in-javascript
@@ -70,6 +80,7 @@ drawspace.style.justifyContent = 'center';
 const container = document.querySelector(".container");
 container.style.cssText = "display: flex; flex-direction: column; height: 960px; width: 960px;"
 
+let brightness = 1.00;
 drawBoxes();
 
  
