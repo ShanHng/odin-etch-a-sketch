@@ -3,7 +3,7 @@
 ## Introduction
 This is a square drawing board where you hover over the grids to color them! 
 
-# Features 
+## Features 
 - [x] Reset your board
 - [x] Set number of grids
 - [x] Random colors chosen for every grid you color, eventually darkens into black 
