@@ -14,6 +14,9 @@ function drawBoxes() {
             box.classList.add("box");
             box.style.cssText = "width: 8vh; height: 8vh; border: 1px solid black";
             
+            // code to make boxes turn blue upon hover
+            box.addEventListener('mouseover', e => box.style['background-color'] = 'skyblue');
+
             row.appendChild(box);
         }
 
@@ -21,3 +24,5 @@ function drawBoxes() {
     }
 }
 
+
+drawBoxes();
